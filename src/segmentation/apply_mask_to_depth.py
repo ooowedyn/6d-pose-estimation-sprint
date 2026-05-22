@@ -1,0 +1,1 @@
+"""Depth masking placeholder."""

@@ -1,0 +1,1 @@
+"""Pose estimation metrics placeholder."""

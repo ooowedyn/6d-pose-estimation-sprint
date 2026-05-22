@@ -1,0 +1,1 @@
+"""solvePnP pose estimation placeholder."""
