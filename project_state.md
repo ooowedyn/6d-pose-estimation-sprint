@@ -10,92 +10,106 @@
 
 ## 1. 현재 주차
 
-- 현재 주차: Week 1
-- 현재 단계: 좌표계·3D 변환 기초
-- 현재 날짜: 2026-05-22
-- 현재 상태: 프로젝트 시작 첫날
-- 아직 실제 실험 결과는 없음
+- 현재 주차: Week 2
+- 현재 단계: Camera Model & Calibration
+- 현재 날짜: 2026-06-01
+- 현재 상태: Week 1 좌표계·3D 변환 기초를 마치고, 카메라 모델과 캘리브레이션으로 넘어감
+- 이번 주 핵심 결과물: camera matrix `K`, distortion coefficients, reprojection error
 
 ---
 
 ## 2. 이번 주 목표
 
-Week 1의 목표는 6D pose estimation에서 계속 쓰이는 좌표계 변환의 기본을 이해하는 것이다.
+Week 2의 목표는 6D pose estimation에서 3D 점이 2D 이미지 점으로 투영되는 과정을 이해하고, OpenCV를 이용해 카메라 내부 파라미터를 추정하는 것이다.
 
 이번 주에는 다음을 이해한다.
 
-- vector
-- matrix
-- rotation matrix `R`
-- translation vector `t`
-- homogeneous transformation matrix `T`
-- object frame
-- camera frame
-- world frame
+- pinhole camera model
+- camera coordinate
+- image coordinate
+- intrinsic matrix `K`
+- focal length `fx`, `fy`
+- principal point `cx`, `cy`
+- distortion coefficient
+- checkerboard calibration
+- object points
+- image points
+- reprojection error
+- image undistortion
 
 이번 주의 핵심 질문은 다음이다.
 
-> object frame에 있는 3D 점을 rotation과 translation을 이용해 camera frame 또는 world frame으로 어떻게 옮기는가?
+> object frame 또는 camera frame에 있는 3D 점이 camera intrinsic `K`를 거쳐 이미지 위의 2D pixel coordinate로 어떻게 투영되는가?
+
+Week 2는 이후 Week 3의 PnP pose estimation을 위한 준비 단계이다.  
+PnP에서는 3D object points와 2D image points의 대응을 이용해 object-to-camera pose `T_co`를 추정하는데, 이때 camera matrix `K`와 distortion coefficients가 반드시 필요하다.
 
 ---
 
 ## 3. 이번 주 산출물
 
-Week 1이 끝날 때 남겨야 할 결과물은 다음이다.
+Week 2가 끝날 때 남겨야 할 결과물은 다음이다.
 
-- [ ] 3D 점을 정의한 Python notebook
-- [ ] rotation matrix `R`를 직접 만든 예제
-- [ ] translation vector `t`를 직접 적용한 예제
-- [ ] 4x4 homogeneous transformation matrix `T`를 만든 예제
-- [ ] 변환 전후 3D 좌표 비교
-- [ ] object frame, camera frame, world frame 차이 정리
-- [ ] README 또는 실험노트에 배운 점 정리
+- [ ] `docs/week2_camera_model.md`
+- [ ] calibration용 checkerboard 이미지 데이터
+- [ ] checkerboard 내부 corner 개수 기록
+- [ ] square size 기록
+- [ ] `notebooks/week2_day3_corner_detection.ipynb`
+- [ ] checkerboard corner detection 결과 이미지
+- [ ] `outputs/calibration/camera_matrix.npy`
+- [ ] `outputs/calibration/dist_coeffs.npy`
+- [ ] reprojection error 계산 결과
+- [ ] undistortion 전후 비교 이미지
+- [ ] `docs/week2_distortion.md`
+- [ ] `experiment_log.md`에 Experiment 002 기록
+- [ ] `error_log.md`에 calibration failure case 또는 reprojection error 관련 문제 기록
+- [ ] README에 Week 2 결과 요약 추가
 
 ---
 
 ## 4. 오늘의 목표
 
-Week 1 Day 1의 목표는 너무 넓게 잡지 않고, 아래 하나를 확실히 이해하는 것이다.
+Week 2 Day 1의 목표는 너무 넓게 잡지 않고, 아래 하나를 확실히 이해하는 것이다.
 
-> 3D 점 하나가 회전 `R`과 이동 `t`를 거쳐 다른 좌표계의 점으로 바뀌는 과정을 코드로 확인한다.
+> 카메라가 3D 점을 2D 이미지 평면으로 투영할 때, intrinsic matrix `K`가 어떤 역할을 하는지 이해한다.
 
 오늘 할 일은 다음이다.
 
-- [ ] 3D 점 `P_o = [x, y, z]` 정의하기
-- [ ] 간단한 translation vector `t` 정의하기
-- [ ] z축 기준 rotation matrix `Rz` 정의하기
-- [ ] `P_c = R P_o + t` 계산하기
-- [ ] 같은 변환을 4x4 transformation matrix `T`로 다시 계산하기
-- [ ] 두 결과가 같은지 확인하기
+- [ ] pinhole camera model 개념 정리하기
+- [ ] camera coordinate와 image coordinate 차이 정리하기
+- [ ] focal length `fx`, `fy` 의미 이해하기
+- [ ] principal point `cx`, `cy` 의미 이해하기
+- [ ] intrinsic matrix `K` 구조 외우기
+- [ ] 3D camera point `P_c = [X, Y, Z]`가 2D pixel point `[u, v]`로 가는 흐름 정리하기
+- [ ] `K`가 Week 3 PnP와 Week 4 depth-to-point-cloud에서 어떻게 쓰이는지 메모하기
 - [ ] 오늘 헷갈린 개념을 `error_log.md` 또는 `experiment_log.md`에 적기
 
 ---
 
-## 5. 현재 좌표계 Convention
+## 5. 현재 Camera Model Convention
 
-초기 convention은 다음과 같이 둔다.
-
-### Object Frame
-
-- 물체 자체에 붙어 있는 좌표계
-- 물체의 중심 또는 기준점을 origin으로 둔다
-- 물체 위의 3D 점은 `P_o`로 표현한다
+Week 2에서는 카메라 모델을 다음 convention으로 정리한다.
 
 ### Camera Frame
 
-- 카메라에 붙어 있는 좌표계
-- 카메라에서 본 물체의 위치와 방향을 표현한다
-- 카메라 기준 3D 점은 `P_c`로 표현한다
+- 카메라에 붙어 있는 3D 좌표계
+- 카메라 기준 3D 점은 `P_c = [X, Y, Z]`로 표현한다
+- `Z`는 카메라로부터의 깊이, 즉 depth 방향으로 사용한다
+- 이후 PnP에서 추정하는 pose는 기본적으로 object frame에서 camera frame으로 가는 `T_co`로 해석한다
 
-### World Frame
+### Image Coordinate
 
-- 실험 공간 전체의 기준 좌표계
-- 아직 Week 1에서는 깊게 다루지 않는다
-- 나중에 ROS2, RViz, robot base frame과 연결할 때 사용한다
+- 이미지 위의 2D pixel 좌표계
+- 이미지 점은 `p = [u, v]`로 표현한다
+- `u`는 이미지의 가로 방향 pixel 좌표
+- `v`는 이미지의 세로 방향 pixel 좌표
+- OpenCV에서는 보통 이미지의 왼쪽 위가 원점이다
 
-### Pose Convention
+### Intrinsic Matrix
 
-이 프로젝트에서 기본 pose는 우선 다음 의미로 사용한다.
+카메라 내부 파라미터는 다음 형태의 matrix로 정리한다.
 
 ```text
-object frame -> camera frame
+K = [[fx,  0, cx],
+     [ 0, fy, cy],
+     [ 0,  0,  1]]
