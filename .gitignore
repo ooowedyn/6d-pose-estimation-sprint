@@ -11,9 +11,9 @@ env/
 .ipynb_checkpoints/
 
 # Data
-data/raw/*
-data/processed/*
-data/calibration/*
+# data/raw/*
+# data/processed/*
+# data/calibration/*
 data/sample/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep

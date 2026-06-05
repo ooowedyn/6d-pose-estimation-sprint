@@ -1,0 +1,27 @@
+camera:
+  name: "Galaxy S21 rear camera"
+  device: "Samsung Galaxy S21"
+  image_width: 3024
+  image_height: 4032
+  image_format: "jpg"
+
+checkerboard:
+  square_columns: 11
+  square_rows: 8
+  pattern_size: [10, 7]
+  square_size: 15.0
+  square_size_unit: "mm"
+
+images:
+  image_dir: "data/calibration/images"
+  num_images: 14
+  filename_pattern: "*.jpg"
+
+capture:
+  target_display: "tablet"
+  condition: "태블릿에 디스플레이된 checkerboard를 휴대폰으로 촬영"
+  notes:
+    - "checkerboard는 11 x 8 squares이다."
+    - "OpenCV pattern_size는 inner corners 기준으로 [10, 7]이다."
+    - "square_size는 15.0 mm이다."
+    - "반사나 흐림이 심한 이미지는 제외한다."
