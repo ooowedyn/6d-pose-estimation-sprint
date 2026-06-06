@@ -14,23 +14,23 @@ env/
 # data/raw/*
 # data/processed/*
 # data/calibration/*
-data/sample/*
-!data/raw/.gitkeep
-!data/processed/.gitkeep
-!data/calibration/.gitkeep
-!data/sample/.gitkeep
+# data/sample/*
+# !data/raw/.gitkeep
+# !data/processed/.gitkeep
+# !data/calibration/.gitkeep
+# !data/sample/.gitkeep
 
 # Outputs
-outputs/calibration_results/*
-outputs/pose_visualization/*
-outputs/pointcloud_results/*
-outputs/icp_results/*
-outputs/rviz_captures/*
-!outputs/calibration_results/.gitkeep
-!outputs/pose_visualization/.gitkeep
-!outputs/pointcloud_results/.gitkeep
-!outputs/icp_results/.gitkeep
-!outputs/rviz_captures/.gitkeep
+# outputs/calibration_results/*
+# outputs/pose_visualization/*
+# outputs/pointcloud_results/*
+# outputs/icp_results/*
+# outputs/rviz_captures/*
+# !outputs/calibration_results/.gitkeep
+# !outputs/pose_visualization/.gitkeep
+# !outputs/pointcloud_results/.gitkeep
+# !outputs/icp_results/.gitkeep
+# !outputs/rviz_captures/.gitkeep
 
 # OS
 .DS_Store
