@@ -1,0 +1,22 @@
+# Reprojection Error Summary
+
+Global RMSE reprojection error: 0.295688 px
+RMS from cv2.calibrateCamera: 0.295688 px
+Number of views: 11
+Image size: (3024, 4032)
+
+Per-image results:
+00 | 20260602_221616.jpg | mean=0.300945px | rmse=0.346053px | max=1.040243px
+01 | 20260602_221624.jpg | mean=0.382500px | rmse=0.434171px | max=1.108255px
+02 | 20260602_221628.jpg | mean=0.165956px | rmse=0.181982px | max=0.394608px
+03 | 20260602_221636.jpg | mean=0.196868px | rmse=0.225142px | max=0.649721px
+04 | 20260602_221641.jpg | mean=0.244137px | rmse=0.270292px | max=0.550321px
+05 | 20260602_221650.jpg | mean=0.312482px | rmse=0.348538px | max=0.859114px
+06 | 20260602_221655.jpg | mean=0.178859px | rmse=0.200207px | max=0.442222px
+07 | 20260602_221712.jpg | mean=0.289212px | rmse=0.328716px | max=0.728171px
+08 | 20260602_221718.jpg | mean=0.273495px | rmse=0.312709px | max=0.923993px
+09 | 20260602_221724.jpg | mean=0.253486px | rmse=0.304627px | max=0.911665px
+10 | 20260602_221818.jpg | mean=0.161491px | rmse=0.190856px | max=0.606693px
+
+Worst image:
+{'index': 1, 'image_name': '20260602_221624.jpg', 'mean_error_px': 0.3824998438358307, 'rms_error_px': 0.43417075276374817, 'max_error_px': 1.1082546710968018, 'num_points': 70}
